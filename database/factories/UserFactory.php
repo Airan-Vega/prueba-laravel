@@ -26,7 +26,7 @@ class UserFactory extends Factory
         ];
     }
 
-    private function generateDNI()
+    private function generateDNI(): string
     {
 
         $numbers = $this->faker->unique()->numerify('#########');
@@ -35,7 +35,7 @@ class UserFactory extends Factory
         return $numbers . $letter;
     }
 
-    private function calculateDNILetter($numbers)
+    private function calculateDNILetter(int $numbers): string
     {
 
         $letters = 'TRWAGMYFPDXBNJZSQVHLCK';
