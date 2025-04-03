@@ -17,6 +17,12 @@ class UserController extends Controller
             $page = $request->query('page', 0);
             $offset = $page * $perPage;
 
+            if ($perPage <= 0 || $page < 0) {
+                return response()->json([
+                    "error" => "Los parámetros de paginación deben ser positivos."
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
             $users = User::skip($offset)->take($perPage)->get();
             return response()->json($users);
         } catch (Exception $e) {

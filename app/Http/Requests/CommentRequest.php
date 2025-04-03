@@ -25,7 +25,7 @@ class CommentRequest extends ApiFormRequest
             'post_id' => 'required|exists:posts,id',
             'user_id' => 'required|exists:users,id',
             'content' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'date',
         ];
     }
 
@@ -38,7 +38,6 @@ class CommentRequest extends ApiFormRequest
             'user_id.exists' => 'El user proporcionado no existe. Asegúrate de que el usuario esté registrado',
             'content.required' => 'El contenido es obligatorio. No puede estar vacío',
             'content.string' => 'El contenido debe ser un texto válido',
-            'date.required' => 'La fecha es obligatoria. Por favor, proporciona una fecha válida',
             'date.date' => 'El formato de la fecha no es válido. Asegúrate de usar un formato de fecha correcto',
         ];
     }

@@ -17,6 +17,12 @@ class PostController extends Controller
             $page = $request->query("page", 0);
             $offset = $page * $perPage;
 
+            if ($perPage <= 0 || $page < 0) {
+                return response()->json([
+                    "error" => "Los parámetros de paginación deben ser positivos."
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
             $posts = Post::with('user:id,name')->skip($offset)->take($perPage)->get()->map(function ($post) {
                 return [
                     'id' => $post->id,
