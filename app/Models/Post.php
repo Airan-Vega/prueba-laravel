@@ -20,6 +20,19 @@ class Post extends Model
         'published_at'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($post) {
+            $post->comments()->delete();
+        });
+
+        static::restoring(function ($post) {
+            $post->comments()->restore();
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

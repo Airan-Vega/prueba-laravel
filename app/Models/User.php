@@ -20,6 +20,23 @@ class User extends Authenticatable
         'dni'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+
+            $user->posts()->delete();
+            $user->comments()->delete();
+        });
+
+        static::restoring(function ($user) {
+
+            $user->posts()->restore();
+            $user->comments()->restore();
+        });
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
