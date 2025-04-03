@@ -46,7 +46,7 @@ class UserController extends Controller
                 return response()->json(["error" => "Usuario no encontrado"], Response::HTTP_NOT_FOUND);
             }
             $user->update($validatedData);
-            return response()->json($user);
+            return response()->json(["message" => "Usuario actualizado exitosamente", "user" => $user]);
         } catch (Exception $e) {
             return response()->json(["error" => $e], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
